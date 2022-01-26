@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo
-  publicValue: ${parameters.publicValue}
   labels:
     app: demo
 spec:
@@ -23,6 +22,8 @@ spec:
         env:
         - name: SECRET_VALUE
           value: "Direct Injected From Vault"
+        - name: SPINNAKER_PARAM
+          value: ${ parameters.spinnakerParam }
         imagePullPolicy: Always 
         ports:
         - containerPort: 8080
