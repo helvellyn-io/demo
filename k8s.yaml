@@ -1,15 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  #annotations:
-   # pod-info.details.html.spinnaker.io: blah
   name: demo
   labels:
     app: demo
 spec:
   replicas: 3
   annotations:
-    pod-info.details.html.spinnaker.io: "blah"
+    public-endpoint.details.html.spinnaker.io: "a8d3bbb39119c424588df7e3deac67a5-666906212.us-east-2.elb.amazonaws.com"
   selector:
     matchLabels:
       app: demo
