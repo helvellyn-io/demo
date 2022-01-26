@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo
-  publicValue: ${parameter.publicValue}
+  publicValue: ${parameters.publicValue}
   labels:
     app: demo
 spec:
