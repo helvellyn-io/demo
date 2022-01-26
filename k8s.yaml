@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     public-endpoint.details.html.spinnaker.io: "http://a8d3bbb39119c424588df7e3deac67a5-666906212.us-east-2.elb.amazonaws.com/hello"
-    datadog-dashboard.details.html.spinnaker.io: "add dd dash urls here ->"
+    datadog-dashboard.details.html.spinnaker.io: "https://p.datadoghq.com/sb/nvlzaqyi3d91cdpr-a81b1d0752f253b803eba39ff0112cde"
   name: demo
   labels:
     app: demo
