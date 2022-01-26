@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: helvellyn/demo 
+        image: index.docker.io/helvellyn/demo 
         env:
         - name: SECRET_VALUE
           value: "Direct Injected From Vault"
