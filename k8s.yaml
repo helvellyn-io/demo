@@ -8,6 +8,8 @@ metadata:
     app: demo
 spec:
   replicas: 3
+  annotations:
+    pod-info.details.html.spinnaker.io: "blah"
   selector:
     matchLabels:
       app: demo
