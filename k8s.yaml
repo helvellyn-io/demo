@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: helvellyn/scratch 
+        image: helvellyn/demo 
         ports:
         - containerPort: 8080
 ---
