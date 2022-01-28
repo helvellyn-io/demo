@@ -23,6 +23,7 @@ spec:
       containers:
       - name: ${ parameters.app }
         image: index.docker.io/helvellyn/demo 
+        command: ["./demo"]
         args: ["--mode", "${ parameters.mode }"]
         env:
         - name: SECRET_VALUE
