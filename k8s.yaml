@@ -6,12 +6,12 @@ metadata:
     stage-public-endpint.details.html.spinnaker.io: "http://a1fe7982661c74e7aa833199b95a9c90-889479913.us-east-2.elb.amazonaws.com/hello"
     prod-public-endpoint.details.html.spinnaker.io: "http://a1fe7982661c74e7aa833199b95a9c90-889479913.us-east-2.elb.amazonaws.com/hello"
     datadog-dashboard.details.html.spinnaker.io: "https://p.datadoghq.com/sb/nvlzaqyi3d91cdpr-a81b1d0752f253b803eba39ff0112cde"
-  name: demo
+  name: ${ parameters.app }
   labels:
     app: ${ parameters.app } 
     env: ${ parameters.env }
 spec:
-  replicas: ${ #toInt( parameters.replicas ) }
+  replicas: 3
   selector:
     matchLabels:
       app: ${ parameters.app }
