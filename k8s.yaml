@@ -10,6 +10,9 @@ metadata:
   labels:
     app: ${ parameters.app } 
     env: ${ parameters.env }
+    tags.datadoghq.com/env: "dev"
+    tags.datadoghq.com/service: "demo-app"
+    tags.datadoghq.com/version: "v7"
 spec:
   replicas: 3
   selector:
@@ -19,6 +22,9 @@ spec:
     metadata:
       labels:
         app: ${ parameters.app }
+        tags.datadoghq.com/env: "dev"
+        tags.datadoghq.com/service: "demo-app"
+        tags.datadoghq.com/version: "v7"
     spec:
       containers:
       - name: ${ parameters.app }
@@ -26,8 +32,24 @@ spec:
         command: ["./demo"]
         args: ["--mode", "${ parameters.mode }"]
         env:
-        - name: SECRET_VALUE
-          value: "Direct Injected From Vault"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+            - name: SECRET_VALUE
+              value: "Direct Injected From Vault"
         imagePullPolicy: Always 
         ports:
         - containerPort: 8080
