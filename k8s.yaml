@@ -2,30 +2,31 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    public-endpoint.details.html.spinnaker.io: "http://a8d3bbb39119c424588df7e3deac67a5-666906212.us-east-2.elb.amazonaws.com/hello"
+    dev-public-endpoint.details.html.spinnaker.io: "http://a704cc41c19ea40e894a67165c54f987-1236552832.us-east-2.elb.amazonaws.com/hello"
+    stage-public-endpint.details.html.spinnaker.io: "http://a1fe7982661c74e7aa833199b95a9c90-889479913.us-east-2.elb.amazonaws.com/hello"
+    prod-public-endpoint.details.html.spinnaker.io: "http://a1fe7982661c74e7aa833199b95a9c90-889479913.us-east-2.elb.amazonaws.com/hello"
     datadog-dashboard.details.html.spinnaker.io: "https://p.datadoghq.com/sb/nvlzaqyi3d91cdpr-a81b1d0752f253b803eba39ff0112cde"
   name: demo
   labels:
-    app: demo
+    app: ${ parameters.app } 
     env: ${ parameters.env }
 spec:
-  replicas: 3
+  replicas: ${ #toInt( parameters.replicas ) }
   selector:
     matchLabels:
-      app: demo
+      app: ${ parameters.app }
   template:
     metadata:
       labels:
-        app: demo
+        app: ${ parameters.app }
     spec:
       containers:
-      - name: demo
+      - name: ${ parameters.app }
         image: index.docker.io/helvellyn/demo 
+        args: ["--mode", "${ parameters.mode }"]
         env:
         - name: SECRET_VALUE
           value: "Direct Injected From Vault"
-        - name: SPINNAKER_PARAM
-          value: ${ parameters.spinnakerParam }
         imagePullPolicy: Always 
         ports:
         - containerPort: 8080
@@ -33,10 +34,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo
+  name: ${ parameters.app }
 spec:
   selector:
-    app: demo
+    app: ${ parameters.app }
   ports:
     - port: 80
       targetPort: 8080
