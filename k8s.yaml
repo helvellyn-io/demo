@@ -11,8 +11,8 @@ metadata:
     app: ${ parameters.app } 
     env: ${ parameters.env }
     tags.datadoghq.com/env: "dev"
-    tags.datadoghq.com/service: "demo-app"
-    tags.datadoghq.com/version: "v7"
+    tags.datadoghq.com/service: "demoApplication"
+    tags.datadoghq.com/version: "v8"
 spec:
   replicas: 3
   selector:
@@ -23,8 +23,8 @@ spec:
       labels:
         app: ${ parameters.app }
         tags.datadoghq.com/env: "dev"
-        tags.datadoghq.com/service: "demo-app"
-        tags.datadoghq.com/version: "v7"
+        tags.datadoghq.com/service: "demoApplication"
+        tags.datadoghq.com/version: "v8"
     spec:
       containers:
       - name: ${ parameters.app }
